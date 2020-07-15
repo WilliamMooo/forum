@@ -2,8 +2,7 @@
   <div class="main">
     <div>
       <span class="theme">
-        <label>主题</label>
-        <input type="text"  maxlength="30" v-model="theme" />
+        <input placeholder="请输入主题" type="text"  maxlength="30" v-model="theme" />
       </span>
     </div>
     <div class="text">
@@ -51,7 +50,7 @@ export default {
           "Content-Type":"application/json; charset=utf-8"
         }
       }
-      let url="http://www.williammo.com:8081/forum/backend/postThread.php"
+      let url="http://152.32.131.27:8080/stock_forum/backend/postThread.php"
       this.$http.post(url,dict,headers).then((response)=>{
         if(response.data['status']==0) this.$router.push({name:'see'})
         alert(response.data['msg'])
@@ -83,6 +82,7 @@ button {
   height: 50px;
 }
 .theme input {
+  width: 80vw;
   border: 1px;
   border-radius: 4px;
   background: #b2cfee;
@@ -91,6 +91,7 @@ button {
   padding-top: 20px;
 }
 textarea {
+  width: 80vw;
   resize: none;
   border: 1px;
   border-radius: 4px;

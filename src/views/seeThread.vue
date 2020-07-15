@@ -48,7 +48,7 @@ export default {
           "Content-Type":"application/json; charset=utf-8"
         }
       }
-      let url="http://www.williammo.com:8081/forum/backend/getThreads.php"
+      let url="http://152.32.131.27:8080/stock_forum/backend/getThreads.php"
       this.$http.get(url,headers).then((response)=>{
         if(response.data['status']==0) {
           const data = response.data['msg']
@@ -78,7 +78,7 @@ export default {
       let headers = {
         header:{ "Content-Type":"application/json; charset=utf-8" }
       }
-      let url="http://www.williammo.com:8081/forum/backend/getSelectedThreads.php"
+      let url="http://152.32.131.27:8080/stock_forum/backend/getSelectedThreads.php"
       this.$http.get(url,dict, headers).then((response)=>{
         if(response.data['status']==0) {
           const data = response.data['msg']
@@ -101,7 +101,7 @@ export default {
       let headers = {
         header:{ "Content-Type":"application/json; charset=utf-8" }
       }
-      let url="http://www.williammo.com:8081/forum/backend/reply.php"
+      let url="http://152.32.131.27:8080/stock_forum/backend/reply.php"
       let dict = {
         owner: this.$cookies.get('now_user').id,
         owner_name: this.$cookies.get('now_user').nickname,
@@ -157,7 +157,6 @@ export default {
   outline: none;
   outline: none;
   background: #0066d0;
-  width: 50%;
   height: 40px;
 }
 

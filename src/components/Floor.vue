@@ -15,28 +15,6 @@ export default {
 </script>
 
 <style>
-.box {
-  position: relative;
-  height: 150px;
-  width: 300px;
-  border-radius: 10px;
-  left: 0;
-  right: 0;
-  margin: 5px auto;
-  background: rgb(50,98,175);
-}
-.content {
-  text-align: left;
-  width: 100%;
-  word-wrap:break-word;  
-  word-break:break-all;
-  text-indent: 2em; 
-  overflow: scroll;
-}
-::-webkit-scrollbar {
-  /*隐藏滚轮*/
-  display: none;
-}
 .time {
   position: absolute;
   bottom: 0;

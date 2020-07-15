@@ -83,7 +83,7 @@ export default {
           "Content-Type":"application/json; charset=utf-8"
         }
       }
-      let url="http://www.williammo.com:8081/forum/backend/login.php"
+      let url="http://152.32.131.27:8080/stock_forum/backend/login.php"
       this.$http.post(url,dict,headers).then((response)=>{
         if(response.data['status']==0) {
           this.$cookies.set('now_user', {id:this.id, nickname:response.data['nickname']})
@@ -99,7 +99,7 @@ export default {
           "Content-Type":"application/json; charset=utf-8"
         }
       }
-      let url="http://www.williammo.com:8081/forum/backend/signUp.php"
+      let url="http://152.32.131.27:8080/stock_forum/backend/signUp.php"
       let dict = {
         nickname:this.nickname,
         id:this.id,

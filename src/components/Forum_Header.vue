@@ -6,6 +6,8 @@
   			<router-link to="/see" exact>看帖</router-link>
   			<router-link to="/send" exact>发帖</router-link>
   			<router-link to="/delete" exact>删帖</router-link>
+			<router-link to="/quotation" exact>行情</router-link>
+			<router-link to="/strategy" exact>策略</router-link>
   		</li>
   	</ul>
   </nav>
@@ -27,11 +29,10 @@ li{
 	display: inline-block;
 	margin: 0 10px;
 }
-
 a{
 	color: #fff;/*设置字体颜色*/
 	text-decoration: none;/*消除下划线*/
-	padding: 12px;
+	padding: 8px;
 	border-radius: 5px;
 }
 nav{

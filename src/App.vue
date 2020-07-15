@@ -7,7 +7,6 @@
 </template>
 
 <style>
-
 * {
   margin: 0;
   padding: 0;
@@ -43,5 +42,9 @@ body {
 }
 .fade-enter, .fade-leave-to {
   opacity: 0;
+}
+::-webkit-scrollbar {
+  /*隐藏滚轮*/
+  display: none;
 }
 </style>

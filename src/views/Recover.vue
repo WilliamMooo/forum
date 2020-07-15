@@ -56,7 +56,7 @@ export default {
           "Content-Type":"application/json; charset=utf-8"
         }
       }
-      let url="http://www.williammo.com:8081/forum/backend/getQuestion.php"
+      let url="http://152.32.131.27:8080/stock_forum/backend/getQuestion.php"
       this.$http.post(url,dict,headers).then((response)=>{
         if(response.data['status']==0) {
           this.question=response.data['msg']
@@ -85,7 +85,7 @@ export default {
           "Content-Type":"application/json; charset=utf-8"
         }
       }
-      let url="http://www.williammo.com:8081/forum/backend/recover.php"
+      let url="http://152.32.131.27:8080/stock_forum/backend/recover.php"
       this.$http.post(url,dict,headers).then((response)=>{
         alert(response.data['msg'])
         if(response.data['status']==0) {

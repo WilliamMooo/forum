@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <h1>我的发帖：</h1>
     <div v-for="(item,i) in thread_list" :key="i" 
       @click="deleteThread(item)"
     >
@@ -31,7 +32,7 @@ export default {
           "Content-Type":"application/json; charset=utf-8"
         }
       }
-      let url="http://www.williammo.com:8081/forum/backend/getThreads.php"
+      let url="http://152.32.131.27:8080/stock_forum/backend/getThreads.php"
       let dict = {
         params:{id: this.$cookies.get('now_user').id}
       }
@@ -56,14 +57,13 @@ export default {
       })
     },
     deleteThread(item) {
-      console.log(item)
       if (confirm('是否删除该帖子?')) {
         let headers = {
           header:{
             "Content-Type":"application/json; charset=utf-8"
           }
         }
-        let url="http://www.williammo.com:8081/forum/backend/deleteThread.php"
+        let url="http://152.32.131.27:8080/stock_forum/backend/deleteThread.php"
         let dict = {
           id:item.id
         }

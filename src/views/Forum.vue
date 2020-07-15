@@ -52,4 +52,23 @@ export default {
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
+.box {
+  position: relative;
+  height: 20vh;
+  width: 80vw;
+  border-radius: 10px;
+  left: 0;
+  right: 0;
+  margin: 5px auto;
+  background: rgb(50,98,175);
+  overflow-y: scroll;
+}
+.content {
+  text-align: left;
+  width: 100%;
+  word-wrap:break-word;  
+  word-break:break-all;
+  text-indent: 2em; 
+  overflow: scroll;
+}
 </style>

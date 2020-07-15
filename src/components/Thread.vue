@@ -26,14 +26,3 @@ export default {
 }
 </script>
 
-<style>
-.box {
-  height: 100px;
-  width: 200px;
-  border-radius: 10px;
-  left: 0;
-  right: 0;
-  margin: 5px auto;
-  background: rgb(50,98,175);
-}
-</style>
