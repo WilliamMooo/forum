@@ -26,18 +26,3 @@ CREATE TABLE `thread_list`(
   `pub_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY(`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
-
-CREATE TABLE `strategy`(
-  `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(30) NOT NULL,
-  `description` VARCHAR(300) NOT NULL,
-  `equity_sum` FLOAT NOT NULL,
-  `annualised_return` FLOAT NOT NULL,
-  `win_count` INT NOT NULL,
-  `max_win` FLOAT NOT NULL,
-  `lose_count` INT NOT NULL,
-  `max_lose` FLOAT NOT NULL,
-  `average_hold` VARCHAR(30) NULL,
-  PRIMARY KEY(`id`),
-  KEY(`name`)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;

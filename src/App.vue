@@ -48,3 +48,12 @@ body {
   display: none;
 }
 </style>
+
+<script>
+// export default {
+//   mounted() {
+//     let sha256 = require("js-sha256").sha256
+//     console.log(sha256('961017025'))
+//   }
+// }
+</script>

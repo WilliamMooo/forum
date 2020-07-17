@@ -5,12 +5,13 @@ header("Access-Control-Allow-Origin:*");
 header('Access-Control-Allow-Headers:x-requested-with,content-type'); 
 
 if (sizeof($_GET)) {
-	$sql = ' SELECT * FROM `equity_curve_'.$_GET['strategy_id'].'`';
+	$sql = ' SELECT * FROM `stock_list` where `code`=?';
 	$stmt = $connect->prepare($sql);
-	$stmt->execute();
+	$stmt->execute(array(
+		$_GET['code']
+	));
 	$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	if (empty($res)) response(1, '未查找到该策略');
-	response(0, $res);
+	if (empty($res)) response(1, '未查询到该股票');
 	$name = $res[0]['name'];
 	$code = $res[0]['code'];
     $sql = ' SELECT * FROM `'.$code.'`';
@@ -21,5 +22,5 @@ if (sizeof($_GET)) {
 	$result['data'] = $quotation;
 	response(0, $result);
 } else {
-	response(1, '用户未登陆');
+	response(1, '输入股票代码为空');
 };

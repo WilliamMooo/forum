@@ -5,7 +5,7 @@ from multiprocessing.pool import Pool
 from datetime import datetime
 import numpy as np
 import itertools
-from getStockData import Data_Reader
+from get_stock_data import Data_Reader
 
 # =====计算资金曲线
 # 交割合约资金曲线
@@ -18,7 +18,7 @@ def equity_curve_for_future_next_open(df, slippage=1 / 1000, c_rate=5 / 10000, l
     在策略中增加滑点的。滑点的处理和手续费是不同的。
     :param df:
     :param slippage:  滑点 ，可以用百分比，也可以用固定值。
-    :param c_rate:  手续费，commission fees，默认为万分之5。不同市场手续费的收取方法不同，对结果有影响。
+    :param c_rate:  手续费，commission fees，默认为万分之5。不同市场手续费的收取方法不同，对结果有影响。比如和股票就不一样。
     :param leverage_rate:  杠杆倍数
     :param face_value:  一张合约的面值
     :param min_margin_ratio: 最低保证金率，低于就会爆仓
@@ -221,6 +221,77 @@ def signal_simple_bolling_para_list(m_list=range(10, 500, 10), n_list=[i / 10 fo
 
     return para_list
 
+
+# =====简单海龟策略
+# 策略
+def signal_simple_turtle(df, para=[20, 10]):
+
+    """
+    今天收盘价突破过去n1条k线中的收盘价和开盘价中的最高价，做多。今天收盘价突破过去n2条k线中的收盘价的最低价，平仓。
+    今天收盘价突破过去n1条k线中的收盘价和开盘价中的的最低价，做空。今天收盘价突破过去n2条k线中的收盘价的最高价，平仓。
+    :param para: [参数1, 参数2]
+    :param df:
+    :return:
+    """
+    n1 = int(para[0])
+    n2 = int(para[1])
+
+    df['open_close_high'] = df[['open', 'close']].max(axis=1)
+    df['open_close_low'] = df[['open', 'close']].min(axis=1)
+    # 最近n1日的最高价、最低价
+    df['n1_high'] = df['open_close_high'].rolling(n1, min_periods=1).max()
+    df['n1_low'] = df['open_close_low'].rolling(n1, min_periods=1).min()
+    # 最近n2日的最高价、最低价
+    df['n2_high'] = df['open_close_high'].rolling(n2, min_periods=1).max()
+    df['n2_low'] = df['open_close_low'].rolling(n2, min_periods=1).min()
+
+    # ===找出做多信号
+    # 当天的收盘价 > n1日的最高价，做多
+    condition = (df['close'] > df['n1_high'].shift(1))
+    # 将买入信号当天的signal设置为1
+    df.loc[condition, 'signal_long'] = 1
+    # ===找出做多平仓
+    # 当天的收盘价 < n2日的最低价，多单平仓
+    condition = (df['close'] < df['n2_low'].shift(1))
+    # 将卖出信号当天的signal设置为0
+    df.loc[condition, 'signal_long'] = 0
+
+    # ===找出做空信号
+    # 当天的收盘价 < n1日的最低价，做空
+    condition = (df['close'] < df['n1_low'].shift(1))
+    df.loc[condition, 'signal_short'] = -1
+    # ===找出做空平仓
+    # 当天的收盘价 > n2日的最高价，做空平仓
+    condition = (df['close'] > df['n2_high'].shift(1))
+    # 将卖出信号当天的signal设置为0
+    df.loc[condition, 'signal_short'] = 0
+
+    # 合并做多做空信号，去除重复信号
+    df['signal'] = df[['signal_long', 'signal_short']].sum(axis=1, min_count=1, skipna=True)  # 若你的pandas版本是最新的，请使用本行代码代替上面一行
+    temp = df[df['signal'].notnull()][['signal']]
+    temp = temp[temp['signal'] != temp['signal'].shift(1)]
+    df['signal'] = temp['signal']
+
+    # 将无关的变量删除
+    df.drop(['n1_high', 'n1_low', 'n2_high', 'n2_low', 'signal_long', 'signal_short', 'open_close_high', 'open_close_low'], axis=1, inplace=True)
+
+    return df
+
+
+# 策略参数组合
+def signal_simple_turtle_para_list(n1_list=range(10, 1000, 10), n2_list=range(10, 1000, 10)):
+    para_list = []
+
+    for n1 in n1_list:
+        for n2 in n2_list:
+            if n2 > n1:
+                continue
+            para = [n1, n2]
+            para_list.append(para)
+
+    return para_list
+
+
 # =====参数设定
 # 手工设定策略参数
 symbol = '中证500'
@@ -230,7 +301,7 @@ c_rate = 0.5 / 10000  # 手续费，取万分之0.5
 slippage = 1 / 1000  # 滑点 ，可以用百分比，取0.1%
 leverage_rate = 1 # 杠杆倍数
 min_margin_ratio = 1 / 10  # 最低保证金率，低于就会爆仓，取10%
-drop_days = 100  # 刚刚上线100天内不交易
+drop_days = 10  # 刚刚上线10天内不交易
 
 
 # =====读入数据

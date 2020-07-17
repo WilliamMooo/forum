@@ -74,11 +74,12 @@ export default {
         alert("密码长度必须为6-30")
         return
       }
+      let sha256 = require("js-sha256").sha256
       let dict = {
         id:this.id,
-        password:this.pass,
+        password:sha256(this.pass),
         question:this.question,
-        answer:this.answer
+        answer:sha256(this.answer)
       }
       let headers = {
         header:{

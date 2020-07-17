@@ -9,6 +9,7 @@
       <div v-if="isShow">
           <div class="no-data">吼吼~暂未查询到数据</div>
       </div>
+      <div v-if="!isShow">{{stock_name}}</div>
       <div v-if="!isShow" id="echartContainer" ref="echartContainer"></div>
   </div>
 </template>
@@ -20,7 +21,7 @@ export default {
     return {
       isShow:true,
       searchValue: '',
-      chart:'',
+      stock_name:'',
       //数据模型 time0 open1 close2 min3 max4 vol5 tag6 macd7 dif8 dea9
       //['2019-10-18',18.56,18.25,18.19,18.56,55.00,0,-0.00,0.08,0.09]
       data: []
@@ -28,6 +29,7 @@ export default {
   },
   methods: {
     getData() {
+      this.isShow = false
       this.data = []
       let dict = { params:{"code": this.searchValue} }
       let headers = {
@@ -39,6 +41,7 @@ export default {
       this.$http.get(url,dict,headers).then((response)=>{
         if(response.data['status']==0) {
           this.isShow = false
+          this.stock_name = response.data['msg']['name']
           let arr = response.data['msg']['data']
           for (let i in arr) {
             this.data.push([arr[i].time, arr[i].open, arr[i].close, arr[i].low, arr[i].high, arr[i].volume, 0])
@@ -333,11 +336,16 @@ export default {
 <style>
 .search {
   display: flex;
-  padding-bottom: 5vh;
-  padding-top: 2vh;
+  padding-bottom: 2vh;
+  width: 80%;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 .search input {
   width: 100%;
+  background: #b2cfee;
+  border: 1px;
 }
 .confirm-btn {
   width: 20%;

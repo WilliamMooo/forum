@@ -74,9 +74,10 @@ export default {
       return flag
     },
     logIn() {
+      let sha256 = require("js-sha256").sha256
       let dict = {
         id:this.id,
-        password:this.pass,
+        password:sha256(this.pass),
       }
       let headers = {
         header:{
@@ -93,6 +94,7 @@ export default {
       })
     },
     signUp() {
+      let sha256 = require("js-sha256").sha256
       if(this.config()==false) return
       let headers = {
         header:{
@@ -103,9 +105,9 @@ export default {
       let dict = {
         nickname:this.nickname,
         id:this.id,
-        password:this.pass,
+        password:sha256(this.pass),
         question:this.question,
-        answer:this.answer
+        answer:sha256(this.answer)
       }
       this.$http.post(url,dict,headers).then((response)=>{
         alert(response.data['msg'])

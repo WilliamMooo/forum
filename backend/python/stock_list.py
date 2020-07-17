@@ -2,7 +2,7 @@ import pymysql
 import pandas as pd
 
 import config
-from getStockData import Data_Reader
+from get_stock_data import Data_Reader
 
 # 连接数据库
 def conn():
@@ -40,12 +40,15 @@ def delListEle(cursor):
     sql = "DELETE FROM `stock_list`"
     # 执行sql语句
     cursor.execute(sql)
+    # 提交到数据库执行
+    db.commit()
 
 # 向数据库插入数据
 def insertEle(cursor, code, name, date):
     sql = 'INSERT INTO `stock_list`(`code`, `name`, `listing_date`) VALUES ("' + code + '","' + name + '","' + date + '")'
     try:
         cursor.execute(sql)
+        db.commit()
     except:
         db.rollback()
 
@@ -73,6 +76,4 @@ if __name__ == "__main__":
         insertEle(cursor, data1['A股代码'][i], data1['A股简称'][i], data1['A股上市日期'][i])
     closeDB(db)
 
-    # 提交到数据库执行
-    db.commit()
     # 统计表的数量sql: SELECT count(TABLE_NAME) FROM information_schema.TABLES WHERE TABLE_SCHEMA='dbname'; 

@@ -3,7 +3,7 @@ import pymysql
 from time import sleep
 
 import config
-from getStockData import Data_Reader
+from get_stock_data import Data_Reader
 
 # 获取股票列表
 def getStockList():

@@ -2,6 +2,10 @@
   <div>
     <div class="status">
       <p>你好,{{nickname}}</p>
+      <div>
+        <p>今日你的发帖次数为{{post_count_today}}</p>
+        <p>今日最活跃的用户为{{active_user}}(id:{{active_user_id}}),共发了{{active_user_post_count}}帖</p>
+      </div>
       <button @click="exit">退出登录</button>
     </div>
   </div>
@@ -13,6 +17,10 @@ export default {
     return {
       id:"",
       nickname:"",
+      post_count_today:'',
+      active_user:'',
+      active_user_id:'',
+      active_user_post_count:''
     }
   },
   mounted() {
@@ -23,6 +31,16 @@ export default {
       let cookie = this.$cookies.get('now_user')
       this.id = cookie.id
       this.nickname= cookie.nickname
+      let dict = { params:{'now_user':this.id} }
+      let headers = {  header:{ "Content-Type":"application/json; charset=utf-8" } }
+      let url="http://152.32.131.27:8080/stock_forum/backend/getPostCount.php"
+      this.$http.get(url,dict,headers).then((response)=>{
+        let msg = response.data['msg']
+        this.post_count_today = msg['now_user_count']
+        this.active_user_id = msg['acticve_user_id']
+        this.active_user = msg['acticve_user_name']
+        this.active_user_post_count = msg['acticve_user_count']
+      })
     },
     exit() {
       if (confirm('您是否确定要退出?')) {
