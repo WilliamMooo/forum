@@ -32,7 +32,7 @@ export default {
           "Content-Type":"application/json; charset=utf-8"
         }
       }
-      let url="http://152.32.131.27:8080/stock_forum/backend/getThreads.php"
+      let url="http://107.150.125.214:8080/stock_forum/backend/getThreads.php"
       let dict = {
         params:{id: this.$cookies.get('now_user').id}
       }
@@ -63,7 +63,7 @@ export default {
             "Content-Type":"application/json; charset=utf-8"
           }
         }
-        let url="http://152.32.131.27:8080/stock_forum/backend/deleteThread.php"
+        let url="http://107.150.125.214:8080/stock_forum/backend/deleteThread.php"
         let dict = {
           id:item.id
         }

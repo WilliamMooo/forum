@@ -48,7 +48,7 @@ export default {
           "Content-Type":"application/json; charset=utf-8"
         }
       }
-      let url="http://152.32.131.27:8080/stock_forum/backend/getThreads.php"
+      let url="http://107.150.125.214:8080/stock_forum/backend/getThreads.php"
       this.$http.get(url,headers).then((response)=>{
         if(response.data['status']==0) {
           const data = response.data['msg']
@@ -78,7 +78,7 @@ export default {
       let headers = {
         header:{ "Content-Type":"application/json; charset=utf-8" }
       }
-      let url="http://152.32.131.27:8080/stock_forum/backend/getSelectedThreads.php"
+      let url="http://107.150.125.214:8080/stock_forum/backend/getSelectedThreads.php"
       this.$http.get(url,dict, headers).then((response)=>{
         if(response.data['status']==0) {
           const data = response.data['msg']
@@ -101,7 +101,7 @@ export default {
       let headers = {
         header:{ "Content-Type":"application/json; charset=utf-8" }
       }
-      let url="http://152.32.131.27:8080/stock_forum/backend/reply.php"
+      let url="http://107.150.125.214:8080/stock_forum/backend/reply.php"
       let dict = {
         owner: this.$cookies.get('now_user').id,
         owner_name: this.$cookies.get('now_user').nickname,
@@ -134,15 +134,16 @@ export default {
   height: 80vh;
   margin: 1px auto;
   overflow-y: auto;
+  color: white;
+  
 }
 .selected button {
   margin-top: 10px;
-  color: white;
   border: 1px;
   border-radius: 4px;
   outline: none;
   outline: none;
-  background: #0066d0;
+  background: #14836b;
   width: 50%;
   height: 40px;
 }
@@ -156,7 +157,7 @@ export default {
   border-radius: 4px;
   outline: none;
   outline: none;
-  background: #0066d0;
+  background: #14836b;
   height: 40px;
 }
 
@@ -168,6 +169,6 @@ export default {
   text-align:center;
   vertical-align: center;
   width: 20%;
-  background: #609bf3;
+  background: #14836b;
 }
 </style>

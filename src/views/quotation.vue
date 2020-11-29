@@ -37,7 +37,7 @@ export default {
           "Content-Type":"application/json; charset=utf-8"
         }
       }
-      let url="http://152.32.131.27:8080/stock_forum/backend/getQuotation.php"
+      let url="http://107.150.125.214:8080/stock_forum/backend/getQuotation.php"
       this.$http.get(url,dict,headers).then((response)=>{
         if(response.data['status']==0) {
           this.isShow = false
@@ -344,7 +344,7 @@ export default {
 }
 .search input {
   width: 100%;
-  background: #b2cfee;
+  background: #b2eeda;
   border: 1px;
 }
 .confirm-btn {
@@ -352,7 +352,7 @@ export default {
   display: inline-block;
   text-align: center;
   color: #fff;
-  background: rgb(50,98,175);
+  background: #14836b;
 }
 .search-input {
   width: 80%;

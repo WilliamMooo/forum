@@ -84,7 +84,7 @@ export default {
           "Content-Type":"application/json; charset=utf-8"
         }
       }
-      let url="http://152.32.131.27:8080/stock_forum/backend/login.php"
+      let url="http://107.150.125.214:8080/stock_forum/backend/login.php"
       this.$http.post(url,dict,headers).then((response)=>{
         if(response.data['status']==0) {
           this.$cookies.set('now_user', {id:this.id, nickname:response.data['nickname']})
@@ -101,7 +101,7 @@ export default {
           "Content-Type":"application/json; charset=utf-8"
         }
       }
-      let url="http://152.32.131.27:8080/stock_forum/backend/signUp.php"
+      let url="http://107.150.125.214:8080/stock_forum/backend/signUp.php"
       let dict = {
         nickname:this.nickname,
         id:this.id,
@@ -182,7 +182,7 @@ export default {
   border: none;
   border-radius: 2px;
   outline: none;
-  background: #0066d0;
+  background: #14836b;
 }
 .login_button label {
   position: absolute;
@@ -200,11 +200,11 @@ export default {
   width: 100%;
   border-radius: 2px;
   background-color: white;
-  box-shadow: 0 1px 1px #0066d0;
+  box-shadow: 0 1px 1px #6fb5c2;
 }
 .login_textfield label {
   margin-right: 10px;
-  color: #007dff;
+  color: #14836b;
 }
 .login_textfield label i {
   width: 20px;

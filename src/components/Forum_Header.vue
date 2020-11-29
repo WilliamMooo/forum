@@ -36,7 +36,7 @@ a{
 	border-radius: 5px;
 }
 nav{
-	background: rgb(50,98,175);
+	background: #14836b;
 	padding: 30px 0;
 }
 /*选中则发生一些变化*/

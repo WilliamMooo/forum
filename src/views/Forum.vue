@@ -60,7 +60,7 @@ export default {
   left: 0;
   right: 0;
   margin: 5px auto;
-  background: rgb(50,98,175);
+  background: #14836b;
   overflow-y: scroll;
 }
 .content {

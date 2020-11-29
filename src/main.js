@@ -10,6 +10,9 @@ Vue.config.productionTip = false
 Vue.prototype.$http = axios
 Vue.use(VueCookies)
 
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

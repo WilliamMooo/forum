@@ -4,7 +4,7 @@
       <p>你好,{{nickname}}</p>
       <div>
         <p>今日你的发帖次数为{{post_count_today}}</p>
-        <p>今日最活跃的用户为{{active_user}}(id:{{active_user_id}}),共发了{{active_user_post_count}}帖</p>
+        <p>最活跃的用户为{{active_user}}(id:{{active_user_id}}),共发了{{active_user_post_count}}帖</p>
       </div>
       <button @click="exit">退出登录</button>
     </div>
@@ -33,7 +33,7 @@ export default {
       this.nickname= cookie.nickname
       let dict = { params:{'now_user':this.id} }
       let headers = {  header:{ "Content-Type":"application/json; charset=utf-8" } }
-      let url="http://152.32.131.27:8080/stock_forum/backend/getPostCount.php"
+      let url="http://107.150.125.214:8080/stock_forum/backend/getPostCount.php"
       this.$http.get(url,dict,headers).then((response)=>{
         let msg = response.data['msg']
         this.post_count_today = msg['now_user_count']
@@ -69,7 +69,7 @@ export default {
   outline: none;
   background: transparent;
   outline: none;
-  background: #0066d0;
+  background: #14836b;
   width: 50%;
   height: 50px;
 }

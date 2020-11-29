@@ -50,7 +50,7 @@ export default {
           "Content-Type":"application/json; charset=utf-8"
         }
       }
-      let url="http://152.32.131.27:8080/stock_forum/backend/postThread.php"
+      let url="http://107.150.125.214:8080/stock_forum/backend/postThread.php"
       this.$http.post(url,dict,headers).then((response)=>{
         if(response.data['status']==0) this.$router.push({name:'see'})
         alert(response.data['msg'])
@@ -77,7 +77,7 @@ button {
   outline: none;
   background: transparent;
   outline: none;
-  background: #0066d0;
+  background: #14836b;
   width: 50%;
   height: 50px;
 }
@@ -85,7 +85,7 @@ button {
   width: 80vw;
   border: 1px;
   border-radius: 4px;
-  background: #b2cfee;
+  background: #b2eeda;
 }
 .text {
   padding-top: 20px;
@@ -95,6 +95,6 @@ textarea {
   resize: none;
   border: 1px;
   border-radius: 4px;
-  background: #b2cfee;
+  background: #b2eeda;
 }
 </style>
